@@ -7,7 +7,7 @@ from config import settings
 from core.image_saver import save_image, encode_image
 from core.image_searcher import search_images
 from core.openai_utils import generate_search_query, analyze_images, extract_objects
-from image_visualizer import display_selected_images
+from image_visualizer import display_result
 
 
 def main():
@@ -37,7 +37,7 @@ def main():
     objects = extract_objects(downloaded_images_base64[best_match_image_number - 1])
     logger.info(f"Extracted objects: {objects}")
 
-    display_selected_images(saved_images)
+    display_result(saved_images)
 
 
 if __name__ == "__main__":
