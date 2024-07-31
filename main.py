@@ -4,10 +4,11 @@ from time import sleep
 from loguru import logger
 
 from config import settings
+from core.image_croper import parse_gpt_response, crop_objects
 from core.image_saver import save_image, encode_image
 from core.image_searcher import search_images
 from core.openai_utils import generate_search_query, analyze_images, extract_objects
-from image_visualizer import display_result
+from core.image_visualizer import display_result
 
 
 def main():
@@ -29,15 +30,24 @@ def main():
         saved_image = save_image(url, image_name)
         if saved_image:
             saved_images.append(saved_image)
-
     downloaded_images_base64 = [encode_image(image_name) for image_name in saved_images]
     best_match_image_number = int(analyze_images(downloaded_images_base64, image_description))
     logger.info(f"The best image is by number: {best_match_image_number}")
 
-    objects = extract_objects(downloaded_images_base64[best_match_image_number - 1])
+    objects = extract_objects(downloaded_images_base64[best_match_image_number - 1], image_description)
     logger.info(f"Extracted objects: {objects}")
-
-    display_result(saved_images)
+    parsed_objects = parse_gpt_response(objects)
+    print(parsed_objects)
+    cropped_objects = crop_objects(
+        saved_images[best_match_image_number - 1],
+        parsed_objects,
+        settings.CROPPED_FOLDER
+    )
+    display_result(
+        saved_images,
+        best_match_image_number - 1,
+        cropped_objects
+    )
 
 
 if __name__ == "__main__":

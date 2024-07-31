@@ -53,8 +53,8 @@ This project involves developing a script to gather and process images using the
 
 2. **Output:**
     - `downloaded_images/` directory with the retrieved images.
-    - `objects/` directory with separate images for each object found in the selected image.
-
+    - `cropped_objects/` directory with separate images for each object found in the selected image.
+    - **Image output with matplotlib is still raw and can look crooked :)**
 ## Contact
 
 For any questions, please contact [petrykiv.dmytro19@gmail.com](mailto:petrykiv.dmytro19@gmail.com) or @accbuyer19 on Telegram.

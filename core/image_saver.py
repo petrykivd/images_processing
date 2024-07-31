@@ -21,9 +21,10 @@ def save_image(url, filename):
             img.save(os.path.join(settings.DOWNLOAD_FOLDER, filename))
         except Image.UnidentifiedImageError:
             logger.warning(f"Cannot identify image file from URL: {url}")
+            return None
     else:
         logger.warning(f"Failed to download image from URL: {url}, status code: {response.status_code}")
-        return
+        return None
     return filename
 
 

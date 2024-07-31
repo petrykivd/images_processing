@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     MAX_RESULTS: int = 5
     MAX_FILE_SIZE: int = 20
     DOWNLOAD_FOLDER: str = "downloaded_images"
+    CROPPED_FOLDER: str = "cropped_objects"
 
     SEARCH_ENGINE_URI: str = "https://www.googleapis.com/customsearch/v1"
 
