@@ -16,7 +16,7 @@ def save_image(url, filename):
     if response.status_code == 200:
         try:
             img = Image.open(io.BytesIO(response.content))
-            if img.mode == 'RGBA':
+            if img.mode in ('RGBA', 'P'):
                 img = img.convert('RGB')
             img.save(os.path.join(settings.DOWNLOAD_FOLDER, filename))
         except Image.UnidentifiedImageError:
